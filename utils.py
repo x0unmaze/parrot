@@ -141,8 +141,15 @@ async def list_voices(proxy: Optional[str] = None, locale: Optional[str] = None,
 async def text_to_speech(text, voice: str = None, rate: str = "+0%", volume: str = "+0%", pitch: str = "+0Hz"):
     if not voice:
         voice = 'Microsoft Server Speech Text to Speech Voice (en-US, AriaNeural)'
-    communicate = Communicate(text=text, voice=voice,
-                              word_boundary=True, sentence_boundary=True)
+    communicate = Communicate(
+        text=text,
+        voice=voice,
+        rate=rate,
+        volume=volume,
+        pitch=pitch,
+        word_boundary=True,
+        sentence_boundary=True,
+    )
     audio_chunks = []
     subtitle = Subtitle()
     async for item in communicate.stream():
